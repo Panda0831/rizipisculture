@@ -37,8 +37,8 @@ spécification dans [`modele_impl.md`](modele_impl.md)) :
 | `Recolte` | `recoltes` | Récoltes partielles / totales d'un cycle |
 | `Vente` | `ventes` | Ventes issues des récoltes (facturation, mode de paiement) |
 
-Règles métier structurantes (à appliquer côté Form Requests / Services) :
-- au plus **un cycle `en_cours` par bassin** ;
+Règles métier structurantes :
+- au plus **un cycle en cours par bassin** — garanti en base par un index unique partiel (validation Form Request à venir) ;
 - conservation de l'**historique des prix** (`distribution_aliments`, `ventes`) ;
 - prélèvements et traitements rattachés au **bassin**, avec lien facultatif au cycle.
 
@@ -85,7 +85,7 @@ Compte de démonstration créé par le seeder (`php artisan db:seed`) :
 php artisan test
 ```
 
-35 tests verts (authentification, profil, modèles et relations, cascades).
+37 tests verts (authentification, profil, modèles et relations, cascades).
 
 ## Structure du projet
 

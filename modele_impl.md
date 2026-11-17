@@ -311,5 +311,5 @@ class User extends Authenticatable
 - Pour `CycleElevage`, prévoir une méthode `calculerEffectifActuel()` pour mettre à jour depuis `mortalites` et `recoltes`.
 - Pour `DistributionAliment`, calculer automatiquement `montant_total = quantite_kg * prix_unitaire_kg` dans un observer/mutator si souhaité.
 - Pour `Vente`, idem pour `montant_total`.
-- Appliquer la validation "un seul cycle en_cours par bassin" au niveau Form Request / Service.
+- La validation « un seul cycle en_cours par bassin » est désormais garantie côté BDD par un index unique partiel ; le contrôle côté Form Request / Service reste à ajouter pour l'expérience utilisateur.
 - `PrelevementEau` et `Traitement` restent accessibles depuis `Bassin` même sans cycle actif. 

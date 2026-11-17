@@ -41,7 +41,7 @@ class CycleElevageFactory extends Factory
     public function termine(): static
     {
         return $this->state(fn (array $attributes) => [
-            'date_fin' => fake()->dateTimeBetween('-1 month', 'now'),
+            'date_fin' => fake()->dateTimeBetween($attributes['date_debut'], 'now'),
             'statut' => 'termine',
         ]);
     }

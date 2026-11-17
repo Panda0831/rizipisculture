@@ -1,7 +1,7 @@
 # Backlog & Sprints - Rizipisculture
 
 > État au 17/11/2026 : modèle de données complet (12 modèles Eloquent, 11 tables métier,
-> migrations, factories, 35 tests verts). Le volet pisciculture est couvert au niveau
+> migrations, factories, 37 tests verts). Le volet pisciculture est couvert au niveau
 > données ; le volet riz (parcelles, campagnes riz, volume d'eau alloué) reste planifié —
 > voir `../BACKLOG.md`.
 
@@ -40,7 +40,8 @@
 - [x] Relations `Bassin.cycleElevages()`, `Bassin.cycleEnCours()`, `Espece.cycleElevages()`
 - [ ] CRUD Espèces et cycles d'élevage
 - [ ] Gestion des cycles d'élevage (ouverture/fermeture)
-- [ ] Règle métier : au plus un cycle `en_cours` par bassin (validation)
+- [x] Règle métier : au plus un cycle `en_cours` par bassin (index unique partiel en BDD, testé)
+- [ ] Validation Form Request de l'unicité du cycle actif (message utilisateur propre)
 - [ ] Suivi de l'effectif (depuis mortalités et récoltes)
 - [ ] Historique par bassin/exploitation
 - [ ] Tests

@@ -124,7 +124,9 @@ cycle_elevages (
   updated_at TIMESTAMP,
   FOREIGN KEY (bassin_id) REFERENCES bassins(id) ON DELETE CASCADE,
   FOREIGN KEY (espece_id) REFERENCES especes(id) ON DELETE RESTRICT,
-  -- Contrainte métier : au plus un cycle en_cours par bassin (à appliquer côté validation Laravel si non supporté par SQLite)
+  -- Contrainte métier : au plus un cycle en_cours par bassin, garantie par un
+  -- index unique partiel (migration add_unique_active_cycle_index...), avec la
+  -- validation Laravel en complément pour un message utilisateur propre.
   INDEX idx_cycle_bassin_statut (bassin_id, statut)
 )
 ```
@@ -266,7 +268,7 @@ ventes (
 
 ## 3. Règles métier à respecter
 
-- **Unicité cycle actif** : un bassin ne peut avoir qu'un seul `cycle_elevages` avec `statut = 'en_cours'`. À contrôler par validation Laravel.
+- **Unicité cycle actif** : un bassin ne peut avoir qu'un seul `cycle_elevages` avec `statut = 'en_cours'`. Garantie en base par un **index unique partiel** (`cycle_elevages_unique_active_per_bassin`) ; la validation Laravel (Form Request) restera à ajouter pour un message utilisateur propre.
 - **Historisation des prix** : `distribution_aliments` conserve `prix_unitaire_kg` et `montant_total` au moment de la distribution.
 - **Suivi flexible** : `prelevement_eaux` et `traitements` sont rattachés au `bassin` (obligatoire). Le rattachement au `cycle_elevage` est facultatif pour permettre le suivi hors cycle actif.
 - **Suivi des mortalités** : toute mortalité doit être enregistrée dans `mortalites` pour un calcul fiable de l'`effectif_actuel`.

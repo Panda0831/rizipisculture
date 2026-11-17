@@ -10,6 +10,7 @@ use App\Models\Mortalite;
 use App\Models\PrelevementEau;
 use App\Models\Recolte;
 use App\Models\Traitement;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -85,5 +86,27 @@ class CycleElevageModelTest extends TestCase
             'bassin_id' => $cycle->bassin_id,
             'cycle_elevage_id' => null,
         ]);
+    }
+
+    public function test_a_second_active_cycle_on_the_same_bassin_is_rejected(): void
+    {
+        $bassin = Bassin::factory()->create();
+        $premier = CycleElevage::factory()->for($bassin)->create();
+        $this->assertModelExists($premier);
+
+        $this->expectException(QueryException::class);
+
+        CycleElevage::factory()->for($bassin)->create();
+    }
+
+    public function test_two_bassins_can_each_have_one_active_cycle(): void
+    {
+        $bassinA = Bassin::factory()->create();
+        $bassinB = Bassin::factory()->create();
+
+        CycleElevage::factory()->for($bassinA)->create();
+        CycleElevage::factory()->for($bassinB)->create();
+
+        $this->assertDatabaseCount('cycle_elevages', 2);
     }
 }

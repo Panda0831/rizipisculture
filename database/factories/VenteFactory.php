@@ -35,4 +35,21 @@ class VenteFactory extends Factory
             'notes' => fake()->optional()->sentence(),
         ];
     }
+
+    /**
+     * Link the sale to a harvest with a coherent date, quantity and amount.
+     */
+    public function forRecolte(Recolte $recolte): static
+    {
+        return $this->state(function (array $attributes) use ($recolte) {
+            $quantiteKg = fake()->randomFloat(2, 1, (float) $recolte->quantite_kg);
+
+            return [
+                'recolte_id' => $recolte->id,
+                'date_vente' => fake()->dateTimeBetween($recolte->date_recolte, 'now'),
+                'quantite_kg' => $quantiteKg,
+                'montant_total' => round($quantiteKg * $attributes['prix_unitaire_kg'], 2),
+            ];
+        });
+    }
 }

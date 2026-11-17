@@ -29,4 +29,15 @@ class RecolteFactory extends Factory
             'observations' => fake()->optional()->sentence(),
         ];
     }
+
+    /**
+     * Link the harvest to a cycle with a coherent harvest date.
+     */
+    public function forCycle(CycleElevage $cycle): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'cycle_elevage_id' => $cycle->id,
+            'date_recolte' => fake()->dateTimeBetween($cycle->date_debut, $cycle->date_fin ?? now()),
+        ]);
+    }
 }

@@ -33,4 +33,15 @@ class DistributionAlimentFactory extends Factory
             'observations' => fake()->optional()->sentence(),
         ];
     }
+
+    /**
+     * Link the distribution to a cycle with a coherent distribution date.
+     */
+    public function forCycle(CycleElevage $cycle): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'cycle_elevage_id' => $cycle->id,
+            'date_distribution' => fake()->dateTimeBetween($cycle->date_debut, $cycle->date_fin ?? now()),
+        ]);
+    }
 }

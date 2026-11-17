@@ -18,6 +18,8 @@ class AlimentFactory extends Factory
      */
     public function definition(): array
     {
+        $stockMinimum = fake()->randomFloat(2, 0, 500);
+
         return [
             'exploitation_id' => Exploitation::factory(),
             'nom' => fake()->words(2, true),
@@ -25,8 +27,8 @@ class AlimentFactory extends Factory
             'proteines_pourcent' => fake()->optional()->randomFloat(2, 0, 100),
             'prix_unitaire' => fake()->optional()->randomFloat(2, 0, 100000),
             'unite' => 'kg',
-            'stock_actuel' => fake()->randomFloat(2, 0, 10000),
-            'stock_minimum' => fake()->randomFloat(2, 0, 1000),
+            'stock_actuel' => fake()->randomFloat(2, $stockMinimum, $stockMinimum + 1000),
+            'stock_minimum' => $stockMinimum,
         ];
     }
 }
