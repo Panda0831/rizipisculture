@@ -5,21 +5,27 @@ namespace Database\Factories;
 use App\Models\Espece;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends Factory<Espece>
+ */
 class EspeceFactory extends Factory
 {
-    protected $model = Espece::class;
-
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         return [
-            'nom_commun' => $this->faker->word(),
-            'nom_scientifique' => $this->faker->word(),
-            'nom_local' => $this->faker->word(),
-            'temperature_min' => $this->faker->randomFloat(1, 0, 30),
-            'temperature_max' => $this->faker->randomFloat(1, 30, 40),
-            'ph_min' => $this->faker->randomFloat(1, 6, 7),
-            'ph_max' => $this->faker->randomFloat(1, 7, 9),
-            'description' => $this->faker->paragraph(),
+            'nom_commun' => fake()->randomElement(['Tilapia', 'Carpe commune', 'Poisson-chat', 'Truite arc-en-ciel', 'Carpin']),
+            'nom_scientifique' => fake()->optional()->word(),
+            'nom_local' => fake()->optional()->word(),
+            'temperature_min' => fake()->randomFloat(1, 15, 25),
+            'temperature_max' => fake()->randomFloat(1, 26, 35),
+            'ph_min' => fake()->randomFloat(1, 6, 7),
+            'ph_max' => fake()->randomFloat(1, 7, 9),
+            'description' => fake()->optional()->sentence(),
         ];
     }
 }

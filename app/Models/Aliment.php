@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable([
     'exploitation_id',
@@ -29,6 +30,14 @@ class Aliment extends Model
     public function exploitation(): BelongsTo
     {
         return $this->belongsTo(Exploitation::class);
+    }
+
+    /**
+     * Get the distributions that used this feed item.
+     */
+    public function distributionAliments(): HasMany
+    {
+        return $this->hasMany(DistributionAliment::class);
     }
 
     /**

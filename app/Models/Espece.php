@@ -6,27 +6,37 @@ use Database\Factories\EspeceFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-#[Fillable(['nom_commun', 'nom_scientifique', 'nom_local', 'temperature_min', 'temperature_max', 'ph_min', 'ph_max', 'description'])]
 
+#[Fillable([
+    'nom_commun',
+    'nom_scientifique',
+    'nom_local',
+    'temperature_min',
+    'temperature_max',
+    'ph_min',
+    'ph_max',
+    'description',
+])]
 class Espece extends Model
 {
-    @use HasFactory<EspeceFactory>
+    /** @use HasFactory<EspeceFactory> */
     use HasFactory;
-    public function bassins(): HasMany
-    {
-        return $this->hasMany(Bassin::class);
-    }
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-    public function cycleElevage()
+
+    /**
+     * Get the farming cycles involving this species.
+     */
+    public function cycleElevages(): HasMany
     {
         return $this->hasMany(CycleElevage::class);
     }
-    public function casts(): array
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
     {
         return [
             'temperature_min' => 'decimal:1',

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable([
     'exploitation_id',
@@ -30,6 +32,38 @@ class Bassin extends Model
     public function exploitation(): BelongsTo
     {
         return $this->belongsTo(Exploitation::class);
+    }
+
+    /**
+     * Get the farming cycles recorded in the basin.
+     */
+    public function cycleElevages(): HasMany
+    {
+        return $this->hasMany(CycleElevage::class);
+    }
+
+    /**
+     * Get the current farming cycle of the basin, if any.
+     */
+    public function cycleEnCours(): HasOne
+    {
+        return $this->hasOne(CycleElevage::class)->where('statut', 'en_cours');
+    }
+
+    /**
+     * Get the water quality samples taken from the basin.
+     */
+    public function prelevementEaux(): HasMany
+    {
+        return $this->hasMany(PrelevementEau::class);
+    }
+
+    /**
+     * Get the sanitary treatments applied to the basin.
+     */
+    public function traitements(): HasMany
+    {
+        return $this->hasMany(Traitement::class);
     }
 
     /**
