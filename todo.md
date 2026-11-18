@@ -5,7 +5,7 @@
 > données ; le volet riz (parcelles, campagnes riz, volume d'eau alloué) reste planifié —
 > voir `../BACKLOG.md`.
 
-## Sprint 0 : Initialisation (Terminé) ✅
+- [x] Sprint 0 : Initialisation (Terminé)
 - [x] Initialisation du projet Laravel 13
 - [x] Configuration SQLite
 - [x] Installation et scaffolding Laravel Breeze (Blade + auth)
@@ -15,6 +15,7 @@
 - [x] Structure de base prête pour le développement
 
 ## Sprint 1 : Gestion des exploitations (En cours)
+
 - [x] Modèle `Exploitation` (nom, adresse, superficie, propriétaire, etc.)
 - [x] Migration et relation avec `User`
 - [x] Factory et tests des relations/cascades du modèle
@@ -25,6 +26,7 @@
 - [ ] Tests feature pour le CRUD exploitations
 
 ## Sprint 2 : Gestion des bassins / parcelles aquacoles (En cours)
+
 - [x] Modèle `Bassin` (nom, type, superficie, capacité, exploitation_id)
 - [x] Relation Exploitation -> Bassins
 - [x] Migration et factory de `Bassin`
@@ -34,6 +36,7 @@
 - [ ] Tests associés
 
 ## Sprint 3 : Espèces et cycles d'élevage (En cours — modèle fait)
+
 - [x] Modèle `Espece` (nom commun, nom scientifique, paramètres optimaux)
 - [x] Modèle `CycleElevage` (date début/fin, statut, effectif, bassin_id, espece_id)
 - [x] Migrations et factories des deux modèles
@@ -47,6 +50,7 @@
 - [ ] Tests
 
 ## Sprint 4 : Alimentation et intrants (En cours — modèle fait)
+
 - [x] Modèle `Aliment` avec migration, factory et relation à `Exploitation`
 - [x] Modèle `DistributionAliment` avec migration et factory (prix et montant historisés)
 - [ ] CRUD Aliments et distributions
@@ -57,6 +61,7 @@
 - [ ] Tests
 
 ## Sprint 5 : Qualité de l'eau et suivi sanitaire (En cours — modèle fait)
+
 - [x] Modèle `PrelevementEau` (pH, température, oxygène, ammoniac, nitrites, nitrates, transparence)
 - [x] Modèle `Traitement` (interventions sanitaires, rattachées au bassin)
 - [x] Migrations et factories des deux modèles
@@ -67,6 +72,7 @@
 - [ ] Tests
 
 ## Sprint 6 : Récoltes, ventes et traçabilité (En cours — modèle fait)
+
 - [x] Modèle `Recolte` (date, type, quantité, poids moyen, cycle_elevage_id)
 - [x] Modèle `Vente` (client, quantité, prix unitaire, montant, mode de paiement, statut)
 - [x] Migrations et factories des deux modèles
@@ -78,6 +84,7 @@
 - [ ] Tests
 
 ## Sprint 7 : Tableau de bord et rapports (À faire)
+
 - [ ] Dashboard avec KPIs par exploitation
 - [ ] Statistiques globales
 - [ ] Graphiques (Chart.js ou similaire)
@@ -86,8 +93,10 @@
 - [ ] Optimisations et tests finaux
 
 ## Livrables transverses (en continu)
+
 - [x] MCD / MLD à jour (`MCD_MLD.md`) et spécification des modèles (`modele_impl.md`)
 - [x] README du projet (installation, lancement, tests, compte de démo)
 - [ ] Seeders : jeu de données rizipisculture crédible et reconstructible en 1 commande
-- [ ] API REST (consultation + création, isolation par exploitation)
+- [x] API REST CRUD authentifiée pour les 11 ressources métier, isolation par exploitation
+- [x] Tests feature des endpoints (CRUD, authentification, isolation et règles métier)
 - [ ] Rapport technique (15–25 p.)
